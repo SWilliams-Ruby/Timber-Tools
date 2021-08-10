@@ -1,0 +1,24 @@
+/* Style the tab buttons */
+.tablink {
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  /* font-size: 17px; */
+  width: 25%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.tablink:hover {
+  /* background-color: #ff6666 */
+  border-style: solid;
+  border-width: 1px;
+}
+
+/* Set default styles for tab content */
+.tabcontent {
+  display: none;
+  text-align: left;
+}
