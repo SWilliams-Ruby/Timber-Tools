@@ -1,3 +1,4 @@
+# load 'C:/Users/User/Documents/sketchup code/sw_TimberTools/src/sw_timbertools/bridge fixed SU8.rb'
 # This is a modfifies version of sketchup-bridge 
 # that has been tested with SU8 through SU 2017
 # Ruby 1.6.2 through 2.2.4
@@ -154,9 +155,17 @@ module SW
                 results = Array.new(promises.length)
                 promises.each_with_index{ |promise, i|
                   if promise.respond_to?(:then)
-                    promise.then(Proc.new{ |result|
+                  
+                  p 'x'
+                  #p promise
+                  #p promise.methods.sort
+                  p promise.method(:then).methods.sort
+                  
+                  promise.then(Proc.new{ |result|
                       results[i] = result
                       pending_counter -= 1
+                      p 'y'
+                      
                       resolve.call(results) if pending_counter == 0
                     }, reject) # reject will only run once
                   else
@@ -947,3 +956,4 @@ module SW
   end
 
 end
+puts "loaded su bridge"

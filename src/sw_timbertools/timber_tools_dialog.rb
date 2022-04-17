@@ -1,6 +1,11 @@
 # SW::TimberTools.reload
-require File.join(File.dirname(__FILE__), 'bridge fixed SU8.rb')
- 
+version = Sketchup.version.split('.').first.to_i
+if version >= 17
+  require File.join(File.dirname(__FILE__), 'bridge.rb') 
+else
+  require File.join(File.dirname(__FILE__), 'bridge fixed SU8.rb')
+end
+
 module SW
 
   module TimberTools
@@ -47,7 +52,13 @@ module SW
         else
           dialog = UI::WebDialog.new("Timber Tools", false, "SW::TimberTools", 250, 500, 200, 200, true)
         end
-        dialog.set_file(File.join(PLUGIN_DIR, 'html', 'dialog.html'))
+        
+        version = Sketchup.version.split('.').first.to_i
+        if version >= 17
+          dialog.set_file(File.join(PLUGIN_DIR, 'html', 'dialog.html'))
+        else
+          dialog.set_file(File.join(PLUGIN_DIR, 'html', 'dialogSU8.html'))
+        end
 
         # Attach the skp-bridge magic.
         Bridge.decorate(dialog)
